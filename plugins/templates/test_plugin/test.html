@@ -1,0 +1,42 @@
+{% extends 'admin/master.html' %}
+{% import 'admin/lib.html' as lib with context %}
+{% import 'admin/static.html' as admin_static with context%}
+{% import 'admin/model/layout.html' as model_layout with context %}
+
+{% block head %}
+    {{ super() }}
+    {{ lib.form_css() }}
+{% endblock %}
+
+{% block body %}
+    <h2>Example Heading</h2>
+    {% block model_menu_bar %}
+    {% endblock %}
+
+    {% block model_list_table %}
+    <table class="table table-striped table-bordered table-hover model-list">
+        <thead>
+            <tr>
+                <th class="column-header">Image Name</th>
+                <th class="column-header">Command</th>
+                <th class="column-header">Volumes Mounted</th>
+            </tr>
+        </thead>
+
+        {% for row in data %}
+            <tr>
+                <td>{{ row.image }}</td>
+                <td>{{ row.command }}</td>
+                <td>{{ row.volumes }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endblock %}
+
+{% endblock %}
+
+{% block tail %}
+    {{ super() }}
+    <script src="{{ admin_static.url(filename='admin/js/filters.js') }}"></script>
+    {{ lib.form_js() }}
+{% endblock %}
